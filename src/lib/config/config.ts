@@ -25,7 +25,19 @@ export const user = {
   },
   techstack: [
     {
-      name: "react", color: "red"
-    }
+      name: "svelte", color: "red"
+    },
+    {
+      name: "react", color: "blue"
+    },
+    {
+      name: "laravel", color: "maroon"
+    },
+    {
+      name: "gsap", color: "green"
+    },
+    {
+      name: "MERN", color: "lightblue"
+    },
   ]
 }
