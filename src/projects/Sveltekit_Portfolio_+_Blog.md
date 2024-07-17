@@ -3,7 +3,13 @@ title: Sveltekit Portfolio + Blog
 description: A Journey into Full Stack Development
 date: "2024-07-17"
 published: true
+links:
+  github: https://github.com/calvin-kimani/sveltekit-portfolio
 ---
+
+## Links
+1. [Github](https://github.com/calvin-kimani/sveltekit-portfolio)
+2. [Demo](https://calvin-kimani.vercel.app/))
 
 ## From Templates to Customization
 
