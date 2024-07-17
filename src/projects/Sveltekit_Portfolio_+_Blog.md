@@ -9,7 +9,7 @@ links:
 
 ## Links
 1. [Github](https://github.com/calvin-kimani/sveltekit-portfolio)
-2. [Demo](https://calvin-kimani.vercel.app/))
+2. [Demo](https://calvin-kimani.vercel.app/)
 
 ## From Templates to Customization
 
