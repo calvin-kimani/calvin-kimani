@@ -3,27 +3,44 @@
   import { createIntersectionObserver } from '$lib/utils/animate';
   import { cn } from '$lib/utils';
 
-  let { delay, duration, class_, children } = $props();
+  export interface ScrollRevealProps {
+    delay?: number;
+    duration?: number;
+    class?: string;
+    children: () => any;
+  }
 
-  let element: HTMLElement = $state();
+  let { 
+    delay = 0, 
+    duration = 300, 
+    class: className = '',
+    children 
+  } = $props<ScrollRevealProps>();
+
+  let element: HTMLElement;
   let isVisible = $state(false);
 
-  onMount(()=>{
-    if (element) {
-      isVisible = true;
-    }
-  })
-
+  onMount(() => {
+    if (!element) return;
+    
+    const observer = createIntersectionObserver(element, (entry) => {
+      if (entry.isIntersecting) {
+        isVisible = true;
+        element.style.transitionDelay = `${delay}ms`;
+        observer.unobserve(element);
+      }
+    });
+  });
 </script>
 
 <div
   bind:this={element}
   class={cn(
-    'transition-all duration-[var(--duration)] ease-out',
+    'transition-all ease-out',
     isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8',
-    class_
+    className
   )}
-  style="--duration: {duration}ms; --delay: {delay}ms;"
+  style="--duration: {duration}ms; --delay: {delay}ms; transition-duration: {duration}ms;"
 >
   {@render children()}
 </div>
@@ -51,14 +68,3 @@
     }
   </style>
 </svelte:head>
-
-{#if element}
-  {#await import('$app/environment').then(({ browser }) => browser) then isBrowser}
-    {#if isBrowser}
-      {@const observer = createIntersectionObserver(element, () => {
-        isVisible = true;
-        element.style.transitionDelay = `${delay}ms`;
-      })}
-    {/if}
-  {/await}
-{/if}
