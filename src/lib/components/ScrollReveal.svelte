@@ -3,12 +3,17 @@
   import { createIntersectionObserver } from '$lib/utils/animate';
   import { cn } from '$lib/utils';
 
-  export let delay = 0;
-  export let duration = 600;
-  export let class_ = '';
+  let { delay, duration, class_, children } = $props();
 
-  let element: HTMLElement;
-  let isVisible = false;
+  let element: HTMLElement = $state();
+  let isVisible = $state(false);
+
+  onMount(()=>{
+    if (element) {
+      isVisible = true;
+    }
+  })
+
 </script>
 
 <div
@@ -19,9 +24,8 @@
     class_
   )}
   style="--duration: {duration}ms; --delay: {delay}ms;"
-  on:transitionend
 >
-  <slot />
+  {@render children()}
 </div>
 
 <svelte:head>
